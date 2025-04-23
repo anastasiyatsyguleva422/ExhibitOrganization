@@ -1,0 +1,48 @@
+﻿<Page x:Class="WpfApp1.ExhibitionListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d"
+      Title="Доступные выставки" Background="#d9c4bd"
+            d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Список доступных выставок"
+                   FontSize="24" FontWeight="Bold"
+                   Foreground="Black"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <DataGrid x:Name="ExhibitionsDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="Column"
+                  IsReadOnly="True"
+                  Background="White"
+                  RowBackground="#fff0f0"
+                  AlternatingRowBackground="#f0dede"
+                  Margin="0,0,0,20">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Название}" Width="*" />
+                <DataGridTextColumn Header="Место проведения" Binding="{Binding Место_проведения}" Width="*" />
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding Дата_начала}" Width="*" />
+                <DataGridTextColumn Header="Дата окончания" Binding="{Binding Дата_окончания}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="Назад"
+                Grid.Row="2"
+                HorizontalAlignment="Left"
+                Width="120" Height="30"
+                Click="BackButton_Click"
+                Background="#ba7b85"/>
+    </Grid>
+</Page>

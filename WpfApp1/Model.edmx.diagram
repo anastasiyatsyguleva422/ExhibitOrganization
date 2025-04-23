@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3cf2727c02104266822e0499040ba264" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="ModernArtModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModernArtModel.Выставки" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="ModernArtModel.Выставки_Деятели" Width="1.5" PointX="8.25" PointY="6.25" />
+        <EntityTypeShape EntityType="ModernArtModel.Деятели" Width="1.5" PointX="6" PointY="2.125" />
+        <EntityTypeShape EntityType="ModernArtModel.Место_проведения" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="ModernArtModel.Отзывы" Width="1.5" PointX="5.25" PointY="11" />
+        <EntityTypeShape EntityType="ModernArtModel.Посетители" Width="1.5" PointX="5.25" PointY="13.75" />
+        <EntityTypeShape EntityType="ModernArtModel.Посетители_Отзывы" Width="1.5" PointX="7.5" PointY="12.75" />
+        <EntityTypeShape EntityType="ModernArtModel.Продажи" Width="1.5" PointX="7.5" PointY="9.375" />
+        <EntityTypeShape EntityType="ModernArtModel.Экспонат" Width="1.5" PointX="5.25" PointY="5.75" />
+        <AssociationConnector Association="ModernArtModel.FK__Выставки___ID_Вы__48CFD27E" />
+        <AssociationConnector Association="ModernArtModel.FK__Выставки__ID_Мес__3F466844" />
+        <AssociationConnector Association="ModernArtModel.FK__Отзывы__ID_Выста__45F365D3" />
+        <AssociationConnector Association="ModernArtModel.FK_Посетители_Выставки" />
+        <AssociationConnector Association="ModernArtModel.FK_Экспонат_Выставки" />
+        <AssociationConnector Association="ModernArtModel.FK__Выставки___ID_Де__49C3F6B7" />
+        <AssociationConnector Association="ModernArtModel.FK_Экспонат_Деятели" />
+        <AssociationConnector Association="ModernArtModel.FK__Посетител__ID_От__619B8048" />
+        <AssociationConnector Association="ModernArtModel.FK__Посетител__ID_По__60A75C0F" />
+        <AssociationConnector Association="ModernArtModel.FK__Продажи__ID_Эксп__4222D4EF" />
+        <EntityTypeShape EntityType="ModernArtModel.sysdiagrams" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="ModernArtModel.FK_User_Деятели" />
+        <EntityTypeShape EntityType="ModernArtModel.Приглашения" Width="1.5" PointX="11.25" PointY="4.5" />
+        <AssociationConnector Association="ModernArtModel.FK_Приглашения_Выставки" />
+        <AssociationConnector Association="ModernArtModel.FK_Приглашения_Деятели" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

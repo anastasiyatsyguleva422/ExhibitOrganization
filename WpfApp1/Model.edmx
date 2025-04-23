@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ModernArtModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhotoUrl" Type="nvarchar" MaxLength="255" />
+          <Property Name="ID_Деятели" Type="int" />
+        </EntityType>
+        <EntityType Name="Выставки">
+          <Key>
+            <PropertyRef Name="ID_Выставки" />
+          </Key>
+          <Property Name="ID_Выставки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Дата_начала" Type="date" Nullable="false" />
+          <Property Name="Дата_окончания" Type="date" Nullable="false" />
+          <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Описание_тематики" Type="nvarchar(max)" />
+          <Property Name="ID_Место_проведения" Type="int" />
+        </EntityType>
+        <EntityType Name="Выставки_Деятели">
+          <Key>
+            <PropertyRef Name="ID_Выставки" />
+            <PropertyRef Name="ID_Деятели" />
+          </Key>
+          <Property Name="ID_Выставки" Type="int" Nullable="false" />
+          <Property Name="ID_Деятели" Type="int" Nullable="false" />
+          <Property Name="ДатаРегистрации" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Деятели">
+          <Key>
+            <PropertyRef Name="ID_Деятели" />
+          </Key>
+          <Property Name="ID_Деятели" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Биография" Type="nvarchar(max)" />
+          <Property Name="Контакты" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Место_проведения">
+          <Key>
+            <PropertyRef Name="ID_Место_проведения" />
+          </Key>
+          <Property Name="ID_Место_проведения" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Город" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Тип_места" Type="nvarchar" MaxLength="50" />
+          <Property Name="Название" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Контакты" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Отзывы">
+          <Key>
+            <PropertyRef Name="ID_Отзывы" />
+          </Key>
+          <Property Name="ID_Отзывы" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Текст" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID_Выставки" Type="int" />
+        </EntityType>
+        <EntityType Name="Посетители">
+          <Key>
+            <PropertyRef Name="ID_Посетители" />
+          </Key>
+          <Property Name="ID_Посетители" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ФИО" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Возраст" Type="int" />
+          <Property Name="Пол" Type="nvarchar" MaxLength="10" />
+          <Property Name="Льготы" Type="nvarchar" MaxLength="100" />
+          <Property Name="ID_Выставки" Type="int" />
+        </EntityType>
+        <EntityType Name="Посетители_Отзывы">
+          <Key>
+            <PropertyRef Name="ID_Посетители" />
+            <PropertyRef Name="ID_Отзывы" />
+          </Key>
+          <Property Name="ID_Посетители" Type="int" Nullable="false" />
+          <Property Name="ID_Отзывы" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Приглашения">
+          <Key>
+            <PropertyRef Name="ID_Приглашения" />
+          </Key>
+          <Property Name="ID_Приглашения" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Выставки" Type="int" Nullable="false" />
+          <Property Name="ID_Деятели" Type="int" Nullable="false" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="20" />
+          <Property Name="Дата_приглашения" Type="date" />
+        </EntityType>
+        <EntityType Name="Продажи">
+          <Key>
+            <PropertyRef Name="ID_Продажи" />
+          </Key>
+          <Property Name="ID_Продажи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_Экспонат" Type="int" />
+        </EntityType>
+        <EntityType Name="Экспонат">
+          <Key>
+            <PropertyRef Name="ID_Экспонат" />
+          </Key>
+          <Property Name="ID_Экспонат" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" />
+          <Property Name="Год_создания" Type="int" />
+          <Property Name="Тип_экспоната" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Выставки" Type="int" />
+          <Property Name="ID_Деятели" Type="int" />
+        </EntityType>
+        <Association Name="FK__Выставки___ID_Вы__48CFD27E">
+          <End Role="Выставки" Type="Self.Выставки" Multiplicity="1" />
+          <End Role="Выставки_Деятели" Type="Self.Выставки_Деятели" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Выставки_Деятели">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Выставки___ID_Де__49C3F6B7">
+          <End Role="Деятели" Type="Self.Деятели" Multiplicity="1" />
+          <End Role="Выставки_Деятели" Type="Self.Выставки_Деятели" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="Выставки_Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Выставки__ID_Мес__3F466844">
+          <End Role="Место_проведения" Type="Self.Место_проведения" Multiplicity="0..1" />
+          <End Role="Выставки" Type="Self.Выставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Место_проведения">
+              <PropertyRef Name="ID_Место_проведения" />
+            </Principal>
+            <Dependent Role="Выставки">
+              <PropertyRef Name="ID_Место_проведения" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Отзывы__ID_Выста__45F365D3">
+          <End Role="Выставки" Type="Self.Выставки" Multiplicity="0..1" />
+          <End Role="Отзывы" Type="Self.Отзывы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Отзывы">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посетител__ID_От__619B8048">
+          <End Role="Отзывы" Type="Self.Отзывы" Multiplicity="1" />
+          <End Role="Посетители_Отзывы" Type="Self.Посетители_Отзывы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отзывы">
+              <PropertyRef Name="ID_Отзывы" />
+            </Principal>
+            <Dependent Role="Посетители_Отзывы">
+              <PropertyRef Name="ID_Отзывы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посетител__ID_По__60A75C0F">
+          <End Role="Посетители" Type="Self.Посетители" Multiplicity="1" />
+          <End Role="Посетители_Отзывы" Type="Self.Посетители_Отзывы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Посетители">
+              <PropertyRef Name="ID_Посетители" />
+            </Principal>
+            <Dependent Role="Посетители_Отзывы">
+              <PropertyRef Name="ID_Посетители" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Продажи__ID_Эксп__4222D4EF">
+          <End Role="Экспонат" Type="Self.Экспонат" Multiplicity="0..1" />
+          <End Role="Продажи" Type="Self.Продажи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Экспонат">
+              <PropertyRef Name="ID_Экспонат" />
+            </Principal>
+            <Dependent Role="Продажи">
+              <PropertyRef Name="ID_Экспонат" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Деятели">
+          <End Role="Деятели" Type="Self.Деятели" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Посетители_Выставки">
+          <End Role="Выставки" Type="Self.Выставки" Multiplicity="0..1" />
+          <End Role="Посетители" Type="Self.Посетители" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Посетители">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Приглашения_Выставки">
+          <End Role="Выставки" Type="Self.Выставки" Multiplicity="1" />
+          <End Role="Приглашения" Type="Self.Приглашения" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Приглашения">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Приглашения_Деятели">
+          <End Role="Деятели" Type="Self.Деятели" Multiplicity="1" />
+          <End Role="Приглашения" Type="Self.Приглашения" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="Приглашения">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Экспонат_Выставки">
+          <End Role="Выставки" Type="Self.Выставки" Multiplicity="0..1" />
+          <End Role="Экспонат" Type="Self.Экспонат" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Экспонат">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Экспонат_Деятели">
+          <End Role="Деятели" Type="Self.Деятели" Multiplicity="0..1" />
+          <End Role="Экспонат" Type="Self.Экспонат" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="Экспонат">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModernArtModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Выставки" EntityType="Self.Выставки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Выставки_Деятели" EntityType="Self.Выставки_Деятели" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Деятели" EntityType="Self.Деятели" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Место_проведения" EntityType="Self.Место_проведения" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отзывы" EntityType="Self.Отзывы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Посетители" EntityType="Self.Посетители" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Посетители_Отзывы" EntityType="Self.Посетители_Отзывы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Приглашения" EntityType="Self.Приглашения" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Продажи" EntityType="Self.Продажи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Экспонат" EntityType="Self.Экспонат" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Выставки___ID_Вы__48CFD27E" Association="Self.FK__Выставки___ID_Вы__48CFD27E">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Выставки_Деятели" EntitySet="Выставки_Деятели" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Выставки___ID_Де__49C3F6B7" Association="Self.FK__Выставки___ID_Де__49C3F6B7">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="Выставки_Деятели" EntitySet="Выставки_Деятели" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Выставки__ID_Мес__3F466844" Association="Self.FK__Выставки__ID_Мес__3F466844">
+            <End Role="Место_проведения" EntitySet="Место_проведения" />
+            <End Role="Выставки" EntitySet="Выставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Отзывы__ID_Выста__45F365D3" Association="Self.FK__Отзывы__ID_Выста__45F365D3">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Отзывы" EntitySet="Отзывы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посетител__ID_От__619B8048" Association="Self.FK__Посетител__ID_От__619B8048">
+            <End Role="Отзывы" EntitySet="Отзывы" />
+            <End Role="Посетители_Отзывы" EntitySet="Посетители_Отзывы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посетител__ID_По__60A75C0F" Association="Self.FK__Посетител__ID_По__60A75C0F">
+            <End Role="Посетители" EntitySet="Посетители" />
+            <End Role="Посетители_Отзывы" EntitySet="Посетители_Отзывы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Продажи__ID_Эксп__4222D4EF" Association="Self.FK__Продажи__ID_Эксп__4222D4EF">
+            <End Role="Экспонат" EntitySet="Экспонат" />
+            <End Role="Продажи" EntitySet="Продажи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Деятели" Association="Self.FK_User_Деятели">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Посетители_Выставки" Association="Self.FK_Посетители_Выставки">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Посетители" EntitySet="Посетители" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Приглашения_Выставки" Association="Self.FK_Приглашения_Выставки">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Приглашения" EntitySet="Приглашения" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Приглашения_Деятели" Association="Self.FK_Приглашения_Деятели">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="Приглашения" EntitySet="Приглашения" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Экспонат_Выставки" Association="Self.FK_Экспонат_Выставки">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Экспонат" EntitySet="Экспонат" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Экспонат_Деятели" Association="Self.FK_Экспонат_Деятели">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="Экспонат" EntitySet="Экспонат" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModernArtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ModernArtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="User" EntityType="ModernArtModel.User" />
+          <EntitySet Name="Выставки" EntityType="ModernArtModel.Выставки" />
+          <EntitySet Name="Выставки_Деятели" EntityType="ModernArtModel.Выставки_Деятели" />
+          <EntitySet Name="Деятели" EntityType="ModernArtModel.Деятели" />
+          <EntitySet Name="Место_проведения" EntityType="ModernArtModel.Место_проведения" />
+          <EntitySet Name="Отзывы" EntityType="ModernArtModel.Отзывы" />
+          <EntitySet Name="Посетители" EntityType="ModernArtModel.Посетители" />
+          <EntitySet Name="Посетители_Отзывы" EntityType="ModernArtModel.Посетители_Отзывы" />
+          <EntitySet Name="Продажи" EntityType="ModernArtModel.Продажи" />
+          <EntitySet Name="Экспонат" EntityType="ModernArtModel.Экспонат" />
+          <AssociationSet Name="FK__Выставки___ID_Вы__48CFD27E" Association="ModernArtModel.FK__Выставки___ID_Вы__48CFD27E">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Выставки_Деятели" EntitySet="Выставки_Деятели" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Выставки__ID_Мес__3F466844" Association="ModernArtModel.FK__Выставки__ID_Мес__3F466844">
+            <End Role="Место_проведения" EntitySet="Место_проведения" />
+            <End Role="Выставки" EntitySet="Выставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Отзывы__ID_Выста__45F365D3" Association="ModernArtModel.FK__Отзывы__ID_Выста__45F365D3">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Отзывы" EntitySet="Отзывы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Посетители_Выставки" Association="ModernArtModel.FK_Посетители_Выставки">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Посетители" EntitySet="Посетители" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Экспонат_Выставки" Association="ModernArtModel.FK_Экспонат_Выставки">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Экспонат" EntitySet="Экспонат" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Выставки___ID_Де__49C3F6B7" Association="ModernArtModel.FK__Выставки___ID_Де__49C3F6B7">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="Выставки_Деятели" EntitySet="Выставки_Деятели" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Экспонат_Деятели" Association="ModernArtModel.FK_Экспонат_Деятели">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="Экспонат" EntitySet="Экспонат" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посетител__ID_От__619B8048" Association="ModernArtModel.FK__Посетител__ID_От__619B8048">
+            <End Role="Отзывы" EntitySet="Отзывы" />
+            <End Role="Посетители_Отзывы" EntitySet="Посетители_Отзывы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посетител__ID_По__60A75C0F" Association="ModernArtModel.FK__Посетител__ID_По__60A75C0F">
+            <End Role="Посетители" EntitySet="Посетители" />
+            <End Role="Посетители_Отзывы" EntitySet="Посетители_Отзывы" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Продажи__ID_Эксп__4222D4EF" Association="ModernArtModel.FK__Продажи__ID_Эксп__4222D4EF">
+            <End Role="Экспонат" EntitySet="Экспонат" />
+            <End Role="Продажи" EntitySet="Продажи" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="ModernArtModel.sysdiagrams" />
+          <AssociationSet Name="FK_User_Деятели" Association="ModernArtModel.FK_User_Деятели">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <EntitySet Name="Приглашения" EntityType="ModernArtModel.Приглашения" />
+          <AssociationSet Name="FK_Приглашения_Выставки" Association="ModernArtModel.FK_Приглашения_Выставки">
+            <End Role="Выставки" EntitySet="Выставки" />
+            <End Role="Приглашения" EntitySet="Приглашения" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Приглашения_Деятели" Association="ModernArtModel.FK_Приглашения_Деятели">
+            <End Role="Деятели" EntitySet="Деятели" />
+            <End Role="Приглашения" EntitySet="Приглашения" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FIO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Деятели" Type="Int32" />
+          <NavigationProperty Name="Деятели" Relationship="ModernArtModel.FK_User_Деятели" FromRole="User" ToRole="Деятели" />
+        </EntityType>
+        <EntityType Name="Выставки">
+          <Key>
+            <PropertyRef Name="ID_Выставки" />
+          </Key>
+          <Property Name="ID_Выставки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_начала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Дата_окончания" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Стоимость" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Описание_тематики" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Место_проведения" Type="Int32" />
+          <NavigationProperty Name="Выставки_Деятели" Relationship="ModernArtModel.FK__Выставки___ID_Вы__48CFD27E" FromRole="Выставки" ToRole="Выставки_Деятели" />
+          <NavigationProperty Name="Место_проведения" Relationship="ModernArtModel.FK__Выставки__ID_Мес__3F466844" FromRole="Выставки" ToRole="Место_проведения" />
+          <NavigationProperty Name="Отзывы" Relationship="ModernArtModel.FK__Отзывы__ID_Выста__45F365D3" FromRole="Выставки" ToRole="Отзывы" />
+          <NavigationProperty Name="Посетители" Relationship="ModernArtModel.FK_Посетители_Выставки" FromRole="Выставки" ToRole="Посетители" />
+          <NavigationProperty Name="Экспонат" Relationship="ModernArtModel.FK_Экспонат_Выставки" FromRole="Выставки" ToRole="Экспонат" />
+          <NavigationProperty Name="Приглашения" Relationship="ModernArtModel.FK_Приглашения_Выставки" FromRole="Выставки" ToRole="Приглашения" />
+        </EntityType>
+        <EntityType Name="Выставки_Деятели">
+          <Key>
+            <PropertyRef Name="ID_Выставки" />
+            <PropertyRef Name="ID_Деятели" />
+          </Key>
+          <Property Name="ID_Выставки" Type="Int32" Nullable="false" />
+          <Property Name="ID_Деятели" Type="Int32" Nullable="false" />
+          <Property Name="ДатаРегистрации" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Выставки" Relationship="ModernArtModel.FK__Выставки___ID_Вы__48CFD27E" FromRole="Выставки_Деятели" ToRole="Выставки" />
+          <NavigationProperty Name="Деятели" Relationship="ModernArtModel.FK__Выставки___ID_Де__49C3F6B7" FromRole="Выставки_Деятели" ToRole="Деятели" />
+        </EntityType>
+        <EntityType Name="Деятели">
+          <Key>
+            <PropertyRef Name="ID_Деятели" />
+          </Key>
+          <Property Name="ID_Деятели" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Биография" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Контакты" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Выставки_Деятели" Relationship="ModernArtModel.FK__Выставки___ID_Де__49C3F6B7" FromRole="Деятели" ToRole="Выставки_Деятели" />
+          <NavigationProperty Name="Экспонат" Relationship="ModernArtModel.FK_Экспонат_Деятели" FromRole="Деятели" ToRole="Экспонат" />
+          <NavigationProperty Name="User" Relationship="ModernArtModel.FK_User_Деятели" FromRole="Деятели" ToRole="User" />
+          <NavigationProperty Name="Приглашения" Relationship="ModernArtModel.FK_Приглашения_Деятели" FromRole="Деятели" ToRole="Приглашения" />
+        </EntityType>
+        <EntityType Name="Место_проведения">
+          <Key>
+            <PropertyRef Name="ID_Место_проведения" />
+          </Key>
+          <Property Name="ID_Место_проведения" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Город" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Тип_места" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Название" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Контакты" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Выставки" Relationship="ModernArtModel.FK__Выставки__ID_Мес__3F466844" FromRole="Место_проведения" ToRole="Выставки" />
+        </EntityType>
+        <EntityType Name="Отзывы">
+          <Key>
+            <PropertyRef Name="ID_Отзывы" />
+          </Key>
+          <Property Name="ID_Отзывы" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Текст" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Выставки" Type="Int32" />
+          <NavigationProperty Name="Выставки" Relationship="ModernArtModel.FK__Отзывы__ID_Выста__45F365D3" FromRole="Отзывы" ToRole="Выставки" />
+          <NavigationProperty Name="Посетители_Отзывы" Relationship="ModernArtModel.FK__Посетител__ID_От__619B8048" FromRole="Отзывы" ToRole="Посетители_Отзывы" />
+        </EntityType>
+        <EntityType Name="Посетители">
+          <Key>
+            <PropertyRef Name="ID_Посетители" />
+          </Key>
+          <Property Name="ID_Посетители" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ФИО" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Возраст" Type="Int32" />
+          <Property Name="Пол" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Льготы" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Выставки" Type="Int32" />
+          <NavigationProperty Name="Выставки" Relationship="ModernArtModel.FK_Посетители_Выставки" FromRole="Посетители" ToRole="Выставки" />
+          <NavigationProperty Name="Посетители_Отзывы" Relationship="ModernArtModel.FK__Посетител__ID_По__60A75C0F" FromRole="Посетители" ToRole="Посетители_Отзывы" />
+        </EntityType>
+        <EntityType Name="Посетители_Отзывы">
+          <Key>
+            <PropertyRef Name="ID_Посетители" />
+            <PropertyRef Name="ID_Отзывы" />
+          </Key>
+          <Property Name="ID_Посетители" Type="Int32" Nullable="false" />
+          <Property Name="ID_Отзывы" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Отзывы" Relationship="ModernArtModel.FK__Посетител__ID_От__619B8048" FromRole="Посетители_Отзывы" ToRole="Отзывы" />
+          <NavigationProperty Name="Посетители" Relationship="ModernArtModel.FK__Посетител__ID_По__60A75C0F" FromRole="Посетители_Отзывы" ToRole="Посетители" />
+        </EntityType>
+        <EntityType Name="Продажи">
+          <Key>
+            <PropertyRef Name="ID_Продажи" />
+          </Key>
+          <Property Name="ID_Продажи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Стоимость" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ID_Экспонат" Type="Int32" />
+          <NavigationProperty Name="Экспонат" Relationship="ModernArtModel.FK__Продажи__ID_Эксп__4222D4EF" FromRole="Продажи" ToRole="Экспонат" />
+        </EntityType>
+        <EntityType Name="Экспонат">
+          <Key>
+            <PropertyRef Name="ID_Экспонат" />
+          </Key>
+          <Property Name="ID_Экспонат" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Год_создания" Type="Int32" />
+          <Property Name="Тип_экспоната" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Выставки" Type="Int32" />
+          <Property Name="ID_Деятели" Type="Int32" />
+          <NavigationProperty Name="Выставки" Relationship="ModernArtModel.FK_Экспонат_Выставки" FromRole="Экспонат" ToRole="Выставки" />
+          <NavigationProperty Name="Деятели" Relationship="ModernArtModel.FK_Экспонат_Деятели" FromRole="Экспонат" ToRole="Деятели" />
+          <NavigationProperty Name="Продажи" Relationship="ModernArtModel.FK__Продажи__ID_Эксп__4222D4EF" FromRole="Экспонат" ToRole="Продажи" />
+        </EntityType>
+        <Association Name="FK__Выставки___ID_Вы__48CFD27E">
+          <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="1" />
+          <End Type="ModernArtModel.Выставки_Деятели" Role="Выставки_Деятели" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Выставки_Деятели">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Выставки__ID_Мес__3F466844">
+          <End Type="ModernArtModel.Место_проведения" Role="Место_проведения" Multiplicity="0..1" />
+          <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Место_проведения">
+              <PropertyRef Name="ID_Место_проведения" />
+            </Principal>
+            <Dependent Role="Выставки">
+              <PropertyRef Name="ID_Место_проведения" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Отзывы__ID_Выста__45F365D3">
+          <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="0..1" />
+          <End Type="ModernArtModel.Отзывы" Role="Отзывы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Отзывы">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Посетители_Выставки">
+          <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="0..1" />
+          <End Type="ModernArtModel.Посетители" Role="Посетители" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Посетители">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Экспонат_Выставки">
+          <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="0..1" />
+          <End Type="ModernArtModel.Экспонат" Role="Экспонат" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Экспонат">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Выставки___ID_Де__49C3F6B7">
+          <End Type="ModernArtModel.Деятели" Role="Деятели" Multiplicity="1" />
+          <End Type="ModernArtModel.Выставки_Деятели" Role="Выставки_Деятели" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="Выставки_Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Экспонат_Деятели">
+          <End Type="ModernArtModel.Деятели" Role="Деятели" Multiplicity="0..1" />
+          <End Type="ModernArtModel.Экспонат" Role="Экспонат" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="Экспонат">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посетител__ID_От__619B8048">
+          <End Type="ModernArtModel.Отзывы" Role="Отзывы" Multiplicity="1" />
+          <End Type="ModernArtModel.Посетители_Отзывы" Role="Посетители_Отзывы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отзывы">
+              <PropertyRef Name="ID_Отзывы" />
+            </Principal>
+            <Dependent Role="Посетители_Отзывы">
+              <PropertyRef Name="ID_Отзывы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посетител__ID_По__60A75C0F">
+          <End Type="ModernArtModel.Посетители" Role="Посетители" Multiplicity="1" />
+          <End Type="ModernArtModel.Посетители_Отзывы" Role="Посетители_Отзывы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Посетители">
+              <PropertyRef Name="ID_Посетители" />
+            </Principal>
+            <Dependent Role="Посетители_Отзывы">
+              <PropertyRef Name="ID_Посетители" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Продажи__ID_Эксп__4222D4EF">
+          <End Type="ModernArtModel.Экспонат" Role="Экспонат" Multiplicity="0..1" />
+          <End Type="ModernArtModel.Продажи" Role="Продажи" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Экспонат">
+              <PropertyRef Name="ID_Экспонат" />
+            </Principal>
+            <Dependent Role="Продажи">
+              <PropertyRef Name="ID_Экспонат" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_User_Деятели">
+          <End Type="ModernArtModel.Деятели" Role="Деятели" Multiplicity="0..1" />
+          <End Type="ModernArtModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Приглашения">
+          <Key>
+            <PropertyRef Name="ID_Приглашения" />
+          </Key>
+          <Property Name="ID_Приглашения" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Выставки" Type="Int32" Nullable="false" />
+          <Property Name="ID_Деятели" Type="Int32" Nullable="false" />
+          <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_приглашения" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Выставки" Relationship="ModernArtModel.FK_Приглашения_Выставки" FromRole="Приглашения" ToRole="Выставки" />
+          <NavigationProperty Name="Деятели" Relationship="ModernArtModel.FK_Приглашения_Деятели" FromRole="Приглашения" ToRole="Деятели" />
+        </EntityType>
+        <Association Name="FK_Приглашения_Выставки">
+          <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="1" />
+          <End Type="ModernArtModel.Приглашения" Role="Приглашения" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Выставки">
+              <PropertyRef Name="ID_Выставки" />
+            </Principal>
+            <Dependent Role="Приглашения">
+              <PropertyRef Name="ID_Выставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Приглашения_Деятели">
+          <End Type="ModernArtModel.Деятели" Role="Деятели" Multiplicity="1" />
+          <End Type="ModernArtModel.Приглашения" Role="Приглашения" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Деятели">
+              <PropertyRef Name="ID_Деятели" />
+            </Principal>
+            <Dependent Role="Приглашения">
+              <PropertyRef Name="ID_Деятели" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModernArtModelContainer" CdmEntityContainer="ModernArtEntities">
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ModernArtModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID_Деятели" ColumnName="ID_Деятели" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Выставки">
+            <EntityTypeMapping TypeName="ModernArtModel.Выставки">
+              <MappingFragment StoreEntitySet="Выставки">
+                <ScalarProperty Name="ID_Место_проведения" ColumnName="ID_Место_проведения" />
+                <ScalarProperty Name="Описание_тематики" ColumnName="Описание_тематики" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="Дата_окончания" ColumnName="Дата_окончания" />
+                <ScalarProperty Name="Дата_начала" ColumnName="Дата_начала" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Выставки_Деятели">
+            <EntityTypeMapping TypeName="ModernArtModel.Выставки_Деятели">
+              <MappingFragment StoreEntitySet="Выставки_Деятели">
+                <ScalarProperty Name="ДатаРегистрации" ColumnName="ДатаРегистрации" />
+                <ScalarProperty Name="ID_Деятели" ColumnName="ID_Деятели" />
+                <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Деятели">
+            <EntityTypeMapping TypeName="ModernArtModel.Деятели">
+              <MappingFragment StoreEntitySet="Деятели">
+                <ScalarProperty Name="Контакты" ColumnName="Контакты" />
+                <ScalarProperty Name="Биография" ColumnName="Биография" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="ID_Деятели" ColumnName="ID_Деятели" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Место_проведения">
+            <EntityTypeMapping TypeName="ModernArtModel.Место_проведения">
+              <MappingFragment StoreEntitySet="Место_проведения">
+                <ScalarProperty Name="Контакты" ColumnName="Контакты" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Тип_места" ColumnName="Тип_места" />
+                <ScalarProperty Name="Город" ColumnName="Город" />
+                <ScalarProperty Name="ID_Место_проведения" ColumnName="ID_Место_проведения" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отзывы">
+            <EntityTypeMapping TypeName="ModernArtModel.Отзывы">
+              <MappingFragment StoreEntitySet="Отзывы">
+                <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />
+                <ScalarProperty Name="Текст" ColumnName="Текст" />
+                <ScalarProperty Name="ID_Отзывы" ColumnName="ID_Отзывы" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Посетители">
+            <EntityTypeMapping TypeName="ModernArtModel.Посетители">
+              <MappingFragment StoreEntitySet="Посетители">
+                <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />
+                <ScalarProperty Name="Льготы" ColumnName="Льготы" />
+                <ScalarProperty Name="Пол" ColumnName="Пол" />
+                <ScalarProperty Name="Возраст" ColumnName="Возраст" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="ID_Посетители" ColumnName="ID_Посетители" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Посетители_Отзывы">
+            <EntityTypeMapping TypeName="ModernArtModel.Посетители_Отзывы">
+              <MappingFragment StoreEntitySet="Посетители_Отзывы">
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="ID_Отзывы" ColumnName="ID_Отзывы" />
+                <ScalarProperty Name="ID_Посетители" ColumnName="ID_Посетители" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Продажи">
+            <EntityTypeMapping TypeName="ModernArtModel.Продажи">
+              <MappingFragment StoreEntitySet="Продажи">
+                <ScalarProperty Name="ID_Экспонат" ColumnName="ID_Экспонат" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="ID_Продажи" ColumnName="ID_Продажи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Экспонат">
+            <EntityTypeMapping TypeName="ModernArtModel.Экспонат">
+              <MappingFragment StoreEntitySet="Экспонат">
+                <ScalarProperty Name="ID_Деятели" ColumnName="ID_Деятели" />
+                <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />
+                <ScalarProperty Name="Тип_экспоната" ColumnName="Тип_экспоната" />
+                <ScalarProperty Name="Год_создания" ColumnName="Год_создания" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="ID_Экспонат" ColumnName="ID_Экспонат" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ModernArtModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Приглашения">
+            <EntityTypeMapping TypeName="ModernArtModel.Приглашения">
+              <MappingFragment StoreEntitySet="Приглашения">
+                <ScalarProperty Name="Дата_приглашения" ColumnName="Дата_приглашения" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="ID_Деятели" ColumnName="ID_Деятели" />
+                <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />
+                <ScalarProperty Name="ID_Приглашения" ColumnName="ID_Приглашения" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

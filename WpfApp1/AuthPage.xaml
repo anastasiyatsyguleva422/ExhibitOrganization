@@ -1,0 +1,76 @@
+﻿<Page x:Class="WpfApp1.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Авторизация" Background="#d9c4bd">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!-- Заголовок -->
+            <RowDefinition Height="*" />
+            <!-- Контент -->
+        </Grid.RowDefinitions>
+        <Border BorderThickness="5"
+        BorderBrush="#996666"
+        CornerRadius="10"
+        Background="#bc8f8f"
+        Padding="10"
+        HorizontalAlignment="Center"
+        Margin="10">
+            <TextBlock Grid.Row="0"
+                   Text="Выставки современного искусства"
+                   FontSize="40"
+                   FontWeight="Bold"
+                   Foreground="#543239"
+                   FontFamily="Georgia"
+                   HorizontalAlignment="Center"
+                   Margin="0,30,0,20"/>
+            </Border>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Image Source="/image/pngwing.com (1).png"
+                   Grid.Row="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Width="350"
+                   Margin="10,0,0,0" />
+
+            <Image Source="/image/pngwing.com.png"
+                   Grid.Row="1"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Width="350"
+                   Margin="0,0,10,0" />
+
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBox Name="LoginTextBox" Width="250" Height="30"
+                         Foreground="Gray" Text="Введите логин" Background="#f5f3f2"
+                         GotFocus="LoginTextBox_GotFocus"
+                         LostFocus="LoginTextBox_LostFocus"
+                         TextChanged="LoginTextBox_TextChanged"/>
+
+                <PasswordBox Name="PasswordBox" Width="250" Height="30"
+                             Margin="0,10,0,0" Background="#f5f3f2"/>
+
+                <Button Content="Войти" Width="250" Height="30" Margin="0,10,0,0"
+                        Click="LoginButton_Click" Background="#ba7b85" Foreground="White"/>
+
+                <Button Name="RegisterPageButton" Content="Регистрация"
+                        Click="RegisterPageButton_Click" Width="250" Height="30"
+                        Foreground="White" Background="#911e42" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

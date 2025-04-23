@@ -1,0 +1,84 @@
+﻿<Page x:Class="WpfApp1.CreateExhibitionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Создание выставки"
+      Background="#d9c4bd">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Создание новой выставки"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       Margin="20"
+                       HorizontalAlignment="Center"/>
+
+            <Border Grid.Row="1"
+                    Background="White"
+                    CornerRadius="10"
+                    Padding="30"
+                    Margin="40">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black"
+                                      Opacity="0.2"
+                                      BlurRadius="10"
+                                      ShadowDepth="3"/>
+                </Border.Effect>
+
+                <StackPanel Margin="10" VerticalAlignment="Center">
+
+                    <TextBlock Text="Название выставки" Margin="0,0,0,5"/>
+                    <TextBox x:Name="TitleTextBox" Height="30" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Дата начала" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="StartDatePicker" Height="30" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Дата окончания" Margin="0,0,0,5"/>
+                    <DatePicker x:Name="EndDatePicker" Height="30" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Стоимость участия" Margin="0,0,0,5"/>
+                    <TextBox x:Name="CostTextBox" Height="30" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Описание тематики" Margin="0,0,0,5"/>
+                    <TextBox x:Name="DescriptionTextBox" Height="80" Margin="0,0,0,15" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+                    <TextBlock Text="Место проведения" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="VenueComboBox" Height="30" Margin="0,0,0,15"/>
+
+                </StackPanel>
+            </Border>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,20">
+                <Button Content="Создать"
+                        Width="200" Height="45"
+                        FontSize="16"
+                        Click="CreateButton_Click"
+                        Background="#7ba77b"
+                        Foreground="White"
+                        Padding="10,5"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Margin="10,0"
+                        BorderBrush="Transparent"/>
+
+                <Button Content="Назад"
+                        Width="200" Height="45"
+                        FontSize="16"
+                        Click="BackButton_Click"
+                        Background="#911e42"
+                        Foreground="White"
+                        Padding="10,5"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Margin="10,0"
+                        BorderBrush="Transparent"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,78 @@
+﻿<Page x:Class="WpfApp1.ManageExhibitionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Управление выставками"
+      Background="#d9c4bd">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Управление выставками"
+                   FontSize="28" FontWeight="Bold"
+                   Foreground="Black" Margin="20"
+                   HorizontalAlignment="Center"/>
+
+        <Border Grid.Row="1"
+        Background="White"
+        CornerRadius="10"
+        Padding="20"
+        Margin="40">
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                          Opacity="0.2"
+                          BlurRadius="10"
+                          ShadowDepth="3"/>
+            </Border.Effect>
+
+            <DataGrid x:Name="ExhibitionsDataGrid"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              SelectionMode="Single"
+              FontSize="16"
+              RowBackground="#f9f5f3"
+              AlternatingRowBackground="#eee4e0"
+              BorderBrush="Transparent"
+              HeadersVisibility="Column"
+              GridLinesVisibility="None">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID_Выставки}" Width="40"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Название}" Width="200"/>
+                    <DataGridTextColumn Header="Дата начала" Binding="{Binding Дата_начала, StringFormat=\{0:yyyy-MM-dd\}}" Width="120"/>
+                    <DataGridTextColumn Header="Дата окончания" Binding="{Binding Дата_окончания, StringFormat=\{0:yyyy-MM-dd\}}" Width="120"/>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Стоимость}" Width="100"/>
+                    <DataGridTextColumn Header="Место проведения" Binding="{Binding Место_проведения.Название}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,20">
+            <Button Content="Редактировать"
+                    Width="200" Height="45"
+                    FontSize="16"
+                    Click="EditExhibition_Click"
+                    Background="#ba7b85"
+                    Foreground="White"
+                    Padding="10,5"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    HorizontalAlignment="Center"
+                    BorderBrush="Transparent"/>
+            <Button Content="Назад"
+        Width="200" Height="45"
+        FontSize="16"
+        Background="#911e42"
+        Foreground="White"
+        Padding="10,5"
+        BorderThickness="0"
+        Cursor="Hand"
+        HorizontalAlignment="Center"
+        BorderBrush="Transparent"
+        Click="BackToMain_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
