@@ -41,12 +41,9 @@ namespace WpfApp1
             NavigationService?.Navigate(new CreateExhibitionPage());
         }
         private void SelectExhibits_Click(object sender, RoutedEventArgs e)
-{
-    
-    int selectedExhibitionId = 1; 
-    NavigationService?.Navigate(new SelectExhibitsPage(selectedExhibitionId));
-}
-
+        {
+            NavigationService?.Navigate(new SelectExhibitsPage());
+        }
 
 
     }

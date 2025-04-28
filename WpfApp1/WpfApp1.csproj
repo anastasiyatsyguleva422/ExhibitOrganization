@@ -75,8 +75,20 @@
     <Compile Include="AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BuyExhibitPage.xaml.cs">
+      <DependentUpon>BuyExhibitPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BuyTicketPage.xaml.cs">
+      <DependentUpon>BuyTicketPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChooseExhibitionWindow.xaml.cs">
+      <DependentUpon>ChooseExhibitionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateExhibitionPage.xaml.cs">
       <DependentUpon>CreateExhibitionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListPage.xaml.cs">
+      <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DealtelPage.xaml.cs">
@@ -115,6 +127,8 @@
     <Compile Include="SelectExhibitsPage.xaml.cs">
       <DependentUpon>SelectExhibitsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatusConverter.cs" />
+    <Compile Include="StatusToBrushConverter.cs" />
     <Compile Include="StatusToVisibilityConverter.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -125,12 +139,18 @@
     <Compile Include="VisitorPage.xaml.cs">
       <DependentUpon>VisitorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WriteReviewPage.xaml.cs">
+      <DependentUpon>WriteReviewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Выставки.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ВыставкиMetadata.cs" />
     <Compile Include="ВыставкиPartial.cs" />
     <Compile Include="Выставки_Деятели.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Выставки_Посетители.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Деятели.cs">
@@ -140,6 +160,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Отзывы.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ПокупкиБилетов.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Посетители.cs">
@@ -169,6 +192,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="BuyExhibitPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BuyTicketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChooseExhibitionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateExhibitionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InviteParticipantsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -226,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VisitorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WriteReviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

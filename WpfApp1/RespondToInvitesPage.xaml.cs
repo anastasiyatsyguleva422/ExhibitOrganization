@@ -66,17 +66,16 @@ namespace WpfApp1
 
             if (invite == null)
             {
-                MessageBox.Show("Приглашение не найдено (null)");
+                MessageBox.Show("Приглашение не найдено.");
                 return;
             }
 
             invite.Статус = "Отклонено";
-
-            db.Приглашения.Remove(invite);
             db.SaveChanges();
 
             LoadInvites();
         }
+
 
         private void GoBack(object sender, RoutedEventArgs e)
         {

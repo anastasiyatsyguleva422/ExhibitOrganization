@@ -32,10 +32,12 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Название}" Width="*" />
-                <DataGridTextColumn Header="Место проведения" Binding="{Binding Место_проведения}" Width="*" />
-                <DataGridTextColumn Header="Дата начала" Binding="{Binding Дата_начала}" Width="*" />
-                <DataGridTextColumn Header="Дата окончания" Binding="{Binding Дата_окончания}" Width="*" />
+                <DataGridTextColumn Header="Место проведения" Binding="{Binding МестоПроведения}" Width="*" />
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding ДатаНачала, StringFormat=d}" Width="*" />
+                <DataGridTextColumn Header="Дата окончания" Binding="{Binding ДатаОкончания, StringFormat=d}" Width="*" />
             </DataGrid.Columns>
+
+
         </DataGrid>
 
         <Button Content="Назад"

@@ -19,10 +19,10 @@ namespace WpfApp1
                 var exhibitions = db.Выставки
                     .Select(v => new
                     {
-                        v.Название,
-                        v.Место_проведения,
-                        v.Дата_начала,
-                        v.Дата_окончания
+                        Название = v.Название,
+                        МестоПроведения = v.Место_проведения.Город + ", " + v.Место_проведения.Название, 
+                        ДатаНачала = v.Дата_начала,
+                        ДатаОкончания = v.Дата_окончания
                     })
                     .ToList();
 
@@ -30,9 +30,24 @@ namespace WpfApp1
             }
         }
 
+
+
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new DealtelPage());
+            if (App.CurrentUser?.Role == "Visitor")
+            {
+                NavigationService?.Navigate(new VisitorPage());  
+            }
+            else if (App.CurrentUser?.Role == "Artist" || App.CurrentUser?.Role == "Organizer")
+            {
+                NavigationService?.Navigate(new DealtelPage());  
+            }
+            else
+            {
+                NavigationService?.Navigate(new AuthPage());  
+            }
         }
+
     }
 }
+

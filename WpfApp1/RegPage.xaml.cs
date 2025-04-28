@@ -13,7 +13,30 @@ namespace WpfApp1
         public RegPage()
         {
             InitializeComponent();
+
+            CmbRole.SelectionChanged += CmbRole_SelectionChanged;
         }
+
+        private void CmbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedRole = (CmbRole.SelectedItem as ComboBoxItem)?.Content.ToString().Trim();
+
+            if (selectedRole == "Посетитель")
+            {
+                AgeTextBlock.Visibility = Visibility.Visible;
+                AgeTextBox.Visibility = Visibility.Visible;
+                BenefitsTextBlock.Visibility = Visibility.Visible;
+                BenefitsTextBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AgeTextBlock.Visibility = Visibility.Collapsed;
+                AgeTextBox.Visibility = Visibility.Collapsed;
+                BenefitsTextBlock.Visibility = Visibility.Collapsed;
+                BenefitsTextBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
@@ -30,12 +53,12 @@ namespace WpfApp1
 
             string selectedRole = (CmbRole.SelectedItem as ComboBoxItem)?.Content.ToString().Trim();
             Dictionary<string, string> roleMapping = new Dictionary<string, string>
-            {
-                { "Администратор", "Admin" },
-                { "Посетитель", "Visitor" },
-                { "Деятель", "Artist" },
-                { "Организатор", "Organizer" }
-            };
+    {
+        { "Администратор", "Admin" },
+        { "Посетитель", "Visitor" },
+        { "Деятель", "Artist" },
+        { "Организатор", "Organizer" }
+    };
 
             if (roleMapping.ContainsKey(selectedRole))
             {
@@ -58,6 +81,8 @@ namespace WpfApp1
                     }
 
                     string selectedGender = RadioMale.IsChecked == true ? "Мужской" : "Женский";
+                    int? age = selectedRole == "Visitor" && !string.IsNullOrEmpty(AgeTextBox.Text) ? Convert.ToInt32(AgeTextBox.Text) : (int?)null;
+                    string benefits = selectedRole == "Visitor" ? BenefitsTextBox.Text.Trim() : null;
 
                     User newUser = new User
                     {
@@ -67,11 +92,27 @@ namespace WpfApp1
                         Gender = selectedGender,
                         Role = selectedRole,
                         PhoneNumber = TextBoxPhone.Text.Trim(),
-                        PhotoUrl = TextBoxPhoto.Text.Trim()
                     };
 
                     db.User.Add(newUser);
                     db.SaveChanges();
+
+                     if (selectedRole == "Visitor")
+                    {
+                        var newVisitor = new Посетители
+                        {
+                            ФИО = newUser.FIO,   
+                            Льготы = benefits,  
+                            Пол = selectedGender, 
+                            Возраст = age 
+                        };
+
+                        db.Посетители.Add(newVisitor);
+                        db.SaveChanges();
+
+                        newUser.ID_Посетители = newVisitor.ID_Посетители;
+                        db.SaveChanges();
+                    }
 
                     MessageBox.Show("Регистрация успешна!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     NavigationService.Navigate(new AuthPage());
@@ -82,6 +123,7 @@ namespace WpfApp1
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void TextBoxPhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -118,11 +160,11 @@ namespace WpfApp1
             TextBoxLogin.Clear();
             PasswordBox.Clear();
             TextBoxPhone.Clear();
-            TextBoxPhoto.Clear();
             RadioMale.IsChecked = false;
             RadioFemale.IsChecked = false;
             CmbRole.SelectedIndex = -1;
             NavigationService.Navigate(new AuthPage());
         }
     }
+
 }

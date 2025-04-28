@@ -7,6 +7,7 @@
 
     <Page.Resources>
         <local:StatusToVisibilityConverter x:Key="StatusToVisibilityConverter"/>
+        <local:StatusToBrushConverter x:Key="StatusToBrushConverter"/>
     </Page.Resources>
 
     <StackPanel Margin="20">
@@ -18,29 +19,27 @@
                     <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Padding="10">
                         <StackPanel>
                             <TextBlock FontWeight="Bold" Text="{Binding Выставки.Название}" />
-                            <TextBlock Text="Статус:" />
-                            <TextBlock Text="{Binding Статус}" />
+                            <TextBlock Text="Статус:"/>
+                            <TextBlock Text="{Binding Статус}"
+           Foreground="{Binding Статус, Converter={StaticResource StatusToBrushConverter}}"
+           FontWeight="SemiBold"
+           FontSize="14"/>
+
 
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                 <Button Content="Принять" Click="AcceptInvite_Click" Margin="0,0,10,0"/>
                                 <Button Content="Отклонить" Click="RejectInvite_Click"/>
-                                <Button Content="Назад"
-                                        Width="200" Height="45"
-                                        FontSize="16"
-                                        Click="GoBack"
-                                        Background="#911e42"
-                                        Foreground="White"
-                                        Padding="10,5"
-                                        BorderThickness="0"
-                                        Cursor="Hand"
-                                        Margin="10,0"
-                                        BorderBrush="Transparent"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <Button Content="Назад"
+                HorizontalAlignment="Left"
+                Width="120" Height="30"
+                Click="GoBack"
+                Background="#ba7b85"
+                Margin="0,20,0,0"/>
     </StackPanel>
 </Page>

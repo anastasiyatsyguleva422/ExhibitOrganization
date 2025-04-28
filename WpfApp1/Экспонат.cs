@@ -27,9 +27,8 @@ namespace WpfApp1
         public string Тип_экспоната { get; set; }
         public Nullable<int> ID_Выставки { get; set; }
         public Nullable<int> ID_Деятели { get; set; }
-        public string Статус { get; set; }  // Статус: например, "Ожидает", "Подтверждено" и т.д.
-
-
+        public Nullable<decimal> Цена { get; set; }
+    
         public virtual Выставки Выставки { get; set; }
         public virtual Деятели Деятели { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

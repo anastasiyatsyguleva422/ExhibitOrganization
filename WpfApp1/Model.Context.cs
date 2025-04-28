@@ -25,7 +25,6 @@ namespace WpfApp1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Выставки> Выставки { get; set; }
         public virtual DbSet<Выставки_Деятели> Выставки_Деятели { get; set; }
         public virtual DbSet<Деятели> Деятели { get; set; }
@@ -37,5 +36,8 @@ namespace WpfApp1
         public virtual DbSet<Экспонат> Экспонат { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Приглашения> Приглашения { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Выставки_Посетители> Выставки_Посетители { get; set; }
+        public virtual DbSet<ПокупкиБилетов> ПокупкиБилетов { get; set; }
     }
 }

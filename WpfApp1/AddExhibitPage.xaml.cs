@@ -12,6 +12,7 @@ namespace WpfApp1
             InitializeComponent();
             LoadExhibitions();
             LoadYears();
+            SaleComboBox.SelectionChanged += SaleComboBox_SelectionChanged;
         }
 
         private void LoadExhibitions()
@@ -32,6 +33,24 @@ namespace WpfApp1
             }
         }
 
+        private void SaleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SaleComboBox.SelectedItem != null)
+            {
+                string selectedOption = (SaleComboBox.SelectedItem as ComboBoxItem).Content.ToString();
+                if (selectedOption == "Да")
+                {
+                    PriceLabel.Visibility = Visibility.Visible;
+                    PriceTextBox.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    PriceLabel.Visibility = Visibility.Collapsed;
+                    PriceTextBox.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         private void AddExhibitButton_Click(object sender, RoutedEventArgs e)
         {
             if (App.CurrentUser?.ID_Деятели == null)
@@ -45,6 +64,22 @@ namespace WpfApp1
             string type = (TypeComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
             int? year = YearComboBox.SelectedItem as int?;
             var selectedExhibition = ExhibitionComboBox.SelectedItem as Выставки;
+            string saleOption = (SaleComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            decimal? price = null;
+
+            if (saleOption == "Да" && !string.IsNullOrEmpty(PriceTextBox.Text))
+            {
+                decimal parsedPrice;
+                if (Decimal.TryParse(PriceTextBox.Text.Trim(), out parsedPrice))
+                {
+                    price = parsedPrice;
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректную цену.");
+                    return;
+                }
+            }
 
             if (string.IsNullOrWhiteSpace(title) || type == null || year == null || selectedExhibition == null)
             {
@@ -61,7 +96,8 @@ namespace WpfApp1
                     Тип_экспоната = type,
                     Год_создания = year,
                     ID_Выставки = selectedExhibition.ID_Выставки,
-                    ID_Деятели = App.CurrentUser.ID_Деятели.Value
+                    ID_Деятели = App.CurrentUser.ID_Деятели.Value,
+                    Цена = price
                 };
 
                 db.Экспонат.Add(exhibit);
@@ -69,13 +105,12 @@ namespace WpfApp1
 
                 MessageBox.Show($"Экспонат успешно добавлен! (ID: {exhibit.ID_Экспонат})");
                 NavigationService?.Navigate(new DealtelPage());
-
             }
         }
+
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new DealtelPage());
         }
-
     }
 }

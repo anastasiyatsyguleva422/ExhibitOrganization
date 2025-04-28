@@ -29,5 +29,41 @@ namespace WpfApp1
         {
 
         }
+
+        private void RegisterToExhibition_Click(object sender, RoutedEventArgs e)
+        {
+           
+                NavigationService.Navigate(new ListPage());
+            }
+
+        private void BackToMain_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthPage());
+
+        }
+
+        private void ViewExhibitions_Click(object sender, RoutedEventArgs e)
+        {
+
+            NavigationService?.Navigate(new ExhibitionListPage());
+        }
+
+        private void BuyTicket_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new BuyTicketPage());
+
+        }
+
+        private void BuyExhibit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new BuyExhibitPage());
+
+        }
+
+        private void WriteReview_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new WriteReviewPage());
+
+        }
     }
-}
+    }

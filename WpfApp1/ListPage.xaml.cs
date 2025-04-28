@@ -3,15 +3,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace WpfApp1
 {
-    public partial class RegisterToExhibition : Page
+    public partial class ListPage : Page
     {
-        public RegisterToExhibition()
+        public ListPage()
         {
             InitializeComponent();
-            LoadExhibitions();
+            LoadExhibitions();  
         }
 
         private void LoadExhibitions()
@@ -19,17 +18,15 @@ namespace WpfApp1
             using (var db = new ModernArtEntities())
             {
                 var exhibitions = db.Выставки.ToList();
-
-
                 ExhibitionComboBox.ItemsSource = exhibitions;
-                ExhibitionComboBox.DisplayMemberPath = "Название";         
-                ExhibitionComboBox.SelectedValuePath = "ID_Выставки";    
+                ExhibitionComboBox.DisplayMemberPath = "Название"; 
+                ExhibitionComboBox.SelectedValuePath = "ID_Выставки"; 
             }
         }
 
-        private void BackToMain_Click(object sender, RoutedEventArgs e)
+        private void Back(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new DealtelPage());
+            NavigationService?.Navigate(new VisitorPage()); 
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -41,16 +38,16 @@ namespace WpfApp1
                 return;
             }
 
-            if (App.CurrentUser?.ID_Деятели == null)
+            if (App.CurrentUser?.Role != "Visitor")
             {
-                MessageBox.Show("Вы не зарегистрированы как деятель.");
+                MessageBox.Show("Вы не зарегистрированы как посетитель.");
                 return;
             }
 
             using (var db = new ModernArtEntities())
             {
-                var exists = db.Выставки_Деятели
-                    .FirstOrDefault(x => x.ID_Деятели == App.CurrentUser.ID_Деятели &&
+                var exists = db.Выставки_Посетители
+                    .FirstOrDefault(x => x.ID_Посетители == App.CurrentUser.ID_Посетители &&
                                          x.ID_Выставки == selectedExhibition.ID_Выставки);
 
                 if (exists != null)
@@ -59,23 +56,21 @@ namespace WpfApp1
                     return;
                 }
 
-                var registration = new Выставки_Деятели
+                var registration = new Выставки_Посетители
                 {
                     ID_Выставки = selectedExhibition.ID_Выставки,
-                    ID_Деятели = App.CurrentUser.ID_Деятели.Value,
-                    ДатаРегистрации = DateTime.Now    
+                    ID_Посетители = App.CurrentUser.ID_Посетители.Value,
+                    ДатаРегистрации = DateTime.Now
                 };
 
-
-                db.Выставки_Деятели.Add(registration);
+                db.Выставки_Посетители.Add(registration);  
                 db.SaveChanges();
             }
 
             MessageBox.Show("Вы успешно зарегистрировались на выставку!");
-            NavigationService?.Navigate(new DealtelPage());
-
-
+            NavigationService?.Navigate(new VisitorPage());  
         }
 
+        
     }
 }

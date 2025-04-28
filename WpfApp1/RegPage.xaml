@@ -26,13 +26,17 @@
                 <ComboBoxItem Content="Деятель"/>
                 <ComboBoxItem Content="Организатор"/>
             </ComboBox>
+            <TextBlock Text="Возраст:" Visibility="Collapsed" x:Name="AgeTextBlock"/>
+            <TextBox x:Name="AgeTextBox" Height="30" Margin="0,0,0,15" Visibility="Collapsed"/>
+
+            <TextBlock Text="Льготы:" Visibility="Collapsed" x:Name="BenefitsTextBlock"/>
+            <TextBox x:Name="BenefitsTextBox" Height="30" Margin="0,0,0,15" Visibility="Collapsed"/>
 
             <TextBlock Text="Номер телефона:" Foreground="Black"/>
             <TextBox x:Name="TextBoxPhone" PreviewTextInput="TextBoxPhone_PreviewTextInput" TextChanged="TextBoxPhone_TextChanged" 
                      MaxLength="18" Width="200" Background="#f5f3f2"/>
 
-            <TextBlock Text="Фото (URL):" Foreground="Black"/>
-            <TextBox Name="TextBoxPhoto" Width="200" Foreground="Black" Background="#f5f3f2"/>
+          
 
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button Name="RegisterButton" Content="Регистрация" Click="RegisterButton_Click" Foreground="Black" Width="100" Background="#911e42"/>

@@ -22,6 +22,8 @@ namespace WpfApp1
             this.Посетители = new HashSet<Посетители>();
             this.Экспонат = new HashSet<Экспонат>();
             this.Приглашения = new HashSet<Приглашения>();
+            this.Выставки_Посетители = new HashSet<Выставки_Посетители>();
+            this.ПокупкиБилетов = new HashSet<ПокупкиБилетов>();
         }
     
         public int ID_Выставки { get; set; }
@@ -43,5 +45,9 @@ namespace WpfApp1
         public virtual ICollection<Экспонат> Экспонат { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Приглашения> Приглашения { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Выставки_Посетители> Выставки_Посетители { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ПокупкиБилетов> ПокупкиБилетов { get; set; }
     }
 }

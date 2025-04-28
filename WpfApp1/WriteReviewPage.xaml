@@ -1,0 +1,20 @@
+﻿<Page x:Class="WpfApp1.WriteReviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Оставить отзыв"
+      Background="#d9c4bd">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+            <TextBlock Text="Выберите выставку для отзыва:" FontSize="16" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+            <ComboBox Name="ExhibitionComboBox" Height="30" Margin="0,0,0,20" Background="#f5f3f2"/>
+
+            <TextBlock Text="Введите ваш отзыв:" FontSize="16" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <TextBox Name="ReviewTextBox" Height="100" Width="300" Margin="0,0,0,20" AcceptsReturn="True" TextWrapping="Wrap"/>
+
+            <Button Content="Оставить отзыв" Height="30" Width="250" Background="#ba7b85" Click="SubmitReviewButton_Click"/>
+            <Button Content="Назад на главную" Width="200" Height="30" Margin="0,10,0,0" Click="BackButton_Click" Background="#911e42"/>
+        </StackPanel>
+    </Grid>
+</Page>

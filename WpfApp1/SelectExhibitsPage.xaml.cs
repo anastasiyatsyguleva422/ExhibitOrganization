@@ -8,40 +8,114 @@ namespace WpfApp1
     public partial class SelectExhibitsPage : Page
     {
         private ModernArtEntities db = new ModernArtEntities();
-        private int selectedExhibitionId;
 
-        public SelectExhibitsPage(int exhibitionId)
+        public SelectExhibitsPage()
         {
             InitializeComponent();
-            selectedExhibitionId = exhibitionId; 
             LoadExhibits();
         }
 
+
         private void LoadExhibits()
         {
-            var exhibits = db.Экспонат.ToList(); 
+            var exhibits = db.Экспонат
+                .Select(e => new
+                {
+                    e.ID_Экспонат,
+                    e.Название,
+                    e.Тип_экспоната,
+                    e.Год_создания,
+                    НазваниеВыставки = e.ID_Выставки != null ? e.Выставки.Название : "Не выбрана"
+                })
+                .ToList();
+
             ExhibitsListView.ItemsSource = exhibits;
         }
 
-
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedExhibits = ExhibitsListView.SelectedItems.Cast<Экспонат>().ToList();
+            var selectedItems = ExhibitsListView.SelectedItems.Cast<dynamic>().ToList();
 
-            if (selectedExhibits.Any())
+            if (selectedItems.Count == 0)
             {
-                foreach (var exhibit in selectedExhibits)
+                MessageBox.Show("Выберите хотя бы один экспонат.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var chooseWindow = new ChooseExhibitionWindow();
+            if (chooseWindow.ShowDialog() == true)
+            {
+                int? selectedExhibitionId = chooseWindow.SelectedExhibitionId;
+
+                if (selectedExhibitionId == null)
                 {
-                    exhibit.ID_Выставки = selectedExhibitionId;  
+                    MessageBox.Show("Выставка не выбрана!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                foreach (var selectedItem in selectedItems)
+                {
+                    var exhibit = db.Экспонат.Find(selectedItem.ID_Экспонат);
+                    if (exhibit != null)
+                    {
+                        exhibit.ID_Выставки = selectedExhibitionId.Value;
+                    }
                 }
 
                 db.SaveChanges();
-                MessageBox.Show("Экспонаты успешно отобраны для выставки!");
+                MessageBox.Show("Экспонаты успешно добавлены на выставку!");
+                LoadExhibits();
             }
-            else
+        }
+
+
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = ExhibitsListView.SelectedItems.Cast<dynamic>().ToList();
+
+            if (selectedItems.Count == 0)
             {
-                MessageBox.Show("Пожалуйста, выберите хотя бы один экспонат.");
+                MessageBox.Show("Выберите хотя бы один экспонат.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
+
+            foreach (var selectedItem in selectedItems)
+            {
+                var exhibit = db.Экспонат.Find(selectedItem.ID_Экспонат);
+                if (exhibit != null)
+                {
+                    exhibit.ID_Выставки = null;
+                }
+            }
+
+            db.SaveChanges();
+            MessageBox.Show("Экспонаты успешно убраны с выставки!");
+            LoadExhibits();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = ExhibitsListView.SelectedItems.Cast<dynamic>().ToList();
+
+            if (selectedItems.Count == 0)
+            {
+                MessageBox.Show("Выберите хотя бы один экспонат.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            foreach (var selectedItem in selectedItems)
+            {
+                var exhibit = db.Экспонат.Find(selectedItem.ID_Экспонат);
+                if (exhibit != null)
+                {
+                    db.Экспонат.Remove(exhibit);
+                }
+            }
+
+            db.SaveChanges();
+            MessageBox.Show("Экспонаты удалены!");
+            LoadExhibits();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

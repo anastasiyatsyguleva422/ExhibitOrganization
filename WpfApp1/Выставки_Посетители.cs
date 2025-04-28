@@ -12,18 +12,13 @@ namespace WpfApp1
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Выставки_Посетители
     {
-        public int ID { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-        public string FIO { get; set; }
-        public string Gender { get; set; }
-        public string PhoneNumber { get; set; }
-        public Nullable<int> ID_Деятели { get; set; }
-        public Nullable<int> ID_Посетители { get; set; }
+        public int ID_Выставки { get; set; }
+        public int ID_Посетители { get; set; }
+        public System.DateTime ДатаРегистрации { get; set; }
     
-        public virtual Деятели Деятели { get; set; }
+        public virtual Выставки Выставки { get; set; }
+        public virtual Посетители Посетители { get; set; }
     }
 }
