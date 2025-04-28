@@ -72,6 +72,9 @@
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppDbContext.cs" />
+    <Compile Include="ArtistsListPage.xaml.cs">
+      <DependentUpon>ArtistsListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,9 @@
     <Compile Include="RespondToInvitesPage.xaml.cs">
       <DependentUpon>RespondToInvitesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ReviewsListPage.xaml.cs">
+      <DependentUpon>ReviewsListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectExhibitsPage.xaml.cs">
       <DependentUpon>SelectExhibitsPage.xaml</DependentUpon>
     </Compile>
@@ -135,6 +141,9 @@
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersListPage.xaml.cs">
+      <DependentUpon>UsersListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="VisitorPage.xaml.cs">
       <DependentUpon>VisitorPage.xaml</DependentUpon>
@@ -185,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArtistsListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,7 +273,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ReviewsListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SelectExhibitsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UsersListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

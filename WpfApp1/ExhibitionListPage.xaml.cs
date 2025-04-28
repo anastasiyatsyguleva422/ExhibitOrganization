@@ -38,15 +38,24 @@ namespace WpfApp1
             {
                 NavigationService?.Navigate(new VisitorPage());  
             }
-            else if (App.CurrentUser?.Role == "Artist" || App.CurrentUser?.Role == "Organizer")
+            else if (App.CurrentUser?.Role == "Artist")
             {
-                NavigationService?.Navigate(new DealtelPage());  
+                NavigationService?.Navigate(new DealtelPage()); 
+            }
+            else if (App.CurrentUser?.Role == "Organizer")
+            {
+                NavigationService?.Navigate(new OrganizerPage());  
+            }
+            else if (App.CurrentUser?.Role == "Admin")
+            {
+                NavigationService?.Navigate(new AdminPage()); 
             }
             else
             {
                 NavigationService?.Navigate(new AuthPage());  
             }
         }
+
 
     }
 }
