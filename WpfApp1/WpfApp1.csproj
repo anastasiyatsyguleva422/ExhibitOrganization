@@ -118,6 +118,9 @@
     <Compile Include="OrganizerPage.xaml.cs">
       <DependentUpon>OrganizerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlacePage.xaml.cs">
+      <DependentUpon>PlacePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterToExhibition.xaml.cs">
       <DependentUpon>RegisterToExhibition.xaml</DependentUpon>
     </Compile>
@@ -258,6 +261,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OrganizerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlacePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

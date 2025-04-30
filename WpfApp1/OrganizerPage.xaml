@@ -56,6 +56,16 @@
                         Cursor="Hand"
                         Margin="0,0,0,15"
                         Click="ManageExhibitions_Click"/>
+                <Button Content="Место проведения"
+        Height="45"
+        FontSize="16"
+        Background="#ba7b85"
+        Foreground="White"
+        FontWeight="SemiBold"
+        BorderThickness="0"
+        Cursor="Hand"
+        Margin="0,0,0,15"
+        Click="Place_Click"/>
 
                 <Button Content="Приглашение участников выставки"
                         Height="45"

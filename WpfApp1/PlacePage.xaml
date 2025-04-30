@@ -1,0 +1,46 @@
+﻿<Page x:Class="WpfApp1.PlacePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Добавление места проведения"
+      Background="#d9c4bd">
+
+    <Grid Margin="20">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+            <TextBlock Text="Добавление места проведения"
+                       FontSize="24" FontWeight="Bold" Margin="0,0,0,20"
+                       HorizontalAlignment="Center" Foreground="Black"/>
+
+            <TextBlock Text="Город:" FontSize="14"/>
+            <TextBox x:Name="CityTextBox" Height="25" Margin="0,5,0,10" 
+                     Background="#f5f3f2" TextChanged="CityTextBox_TextChanged"/>
+
+            <TextBlock Text="Тип места:" FontSize="14"/>
+            <TextBox x:Name="TypeTextBox" Height="25" Margin="0,5,0,10" Background="#f5f3f2"/>
+
+            <TextBlock Text="Название:" FontSize="14"/>
+            <TextBox x:Name="NameTextBox" Height="25" Margin="0,5,0,10" Background="#f5f3f2"/>
+
+            <TextBlock Text="Контакты:" FontSize="14"/>
+            <TextBox x:Name="TextBoxPhone" 
+         Height="25" 
+         Margin="0,5,0,20" 
+         Background="#f5f3f2"
+         PreviewTextInput="TextBoxPhone_PreviewTextInput" TextChanged="TextBoxPhone_TextChanged" MaxLength="18"/>
+
+           
+            
+            
+            <Button Content="Сохранить"
+                    Width="250" Height="35" Background="#7ba77b" Foreground="White"
+                    FontSize="16" Click="SaveButton_Click" Margin="0,0,0,10"/>
+
+            <Button Content="Назад"
+                    Width="200" Height="30" Background="#911e42" Foreground="White"
+                    FontSize="14" Click="BackButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

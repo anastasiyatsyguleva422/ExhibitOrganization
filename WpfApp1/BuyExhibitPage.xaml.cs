@@ -30,16 +30,21 @@ namespace WpfApp1
         {
             using (var db = new ModernArtEntities())
             {
+                var soldIds = db.Продажи.Select(p => p.ID_Экспонат).ToList();
+
                 var availableExhibits = db.Экспонат
-                    .Where(e => e.Цена != null) 
+                    .Where(e => e.Цена != null && !soldIds.Contains(e.ID_Экспонат))
                     .Select(e => new { e.ID_Экспонат, e.Название, e.Цена })
                     .ToList();
 
                 ExhibitComboBox.ItemsSource = availableExhibits;
                 ExhibitComboBox.DisplayMemberPath = "Название";
                 ExhibitComboBox.SelectedValuePath = "ID_Экспонат";
+
+                PriceTextBlock.Text = "Стоимость: —";
             }
         }
+
 
         private void ExhibitComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -81,7 +86,10 @@ namespace WpfApp1
                     db.SaveChanges();      
                 }
 
+
                 MessageBox.Show("Экспонат успешно куплен!");
+                LoadExhibits(); 
+
                 NavigationService?.Navigate(new VisitorPage());  
             }
             catch (Exception ex)

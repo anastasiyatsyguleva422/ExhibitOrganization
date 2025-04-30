@@ -11,7 +11,6 @@ namespace WpfApp1.Migrations
 
         protected override void Seed(WpfApp1.AppDbContext context)
         {
-            // данные по умолчанию, если нужны
         }
     }
 }

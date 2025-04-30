@@ -17,12 +17,23 @@ namespace WpfApp1
         {
             using (var db = new ModernArtEntities())
             {
-                var exhibitions = db.Выставки.ToList();
-                ExhibitionComboBox.ItemsSource = exhibitions;
+                if (App.CurrentUser?.ID_Посетители == null)
+                {
+                    MessageBox.Show("Ошибка: пользователь не является посетителем.");
+                    return;
+                }
+
+                var registeredExhibitions = db.Выставки_Посетители
+                    .Where(r => r.ID_Посетители == App.CurrentUser.ID_Посетители)
+                    .Select(r => r.Выставки)
+                    .ToList();
+
+                ExhibitionComboBox.ItemsSource = registeredExhibitions;
                 ExhibitionComboBox.DisplayMemberPath = "Название";
                 ExhibitionComboBox.SelectedValuePath = "ID_Выставки";
             }
         }
+
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {

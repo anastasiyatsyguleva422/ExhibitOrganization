@@ -45,6 +45,9 @@ namespace WpfApp1
             NavigationService?.Navigate(new SelectExhibitsPage());
         }
 
-
+        private void Place_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new PlacePage());
+        }
     }
 }

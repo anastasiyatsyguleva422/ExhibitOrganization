@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WpfApp1
 {
@@ -23,6 +25,19 @@ namespace WpfApp1
             {
                 LoginTextBox.Text = "";
                 LoginTextBox.Foreground = Brushes.Black;
+            }
+        }
+        private string ComputeSha256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.Unicode.GetBytes(rawData));
+                StringBuilder builder = new StringBuilder();
+                foreach (var t in bytes)
+                {
+                    builder.Append(t.ToString("X2"));
+                }
+                return builder.ToString();
             }
         }
 
@@ -59,7 +74,8 @@ namespace WpfApp1
 
             using (var db = new ModernArtEntities())
             {
-                var user = db.User.FirstOrDefault(u => u.Login.Trim() == login && u.Password.Trim() == password);
+                string hashedPassword = ComputeSha256Hash(password);
+                var user = db.User.FirstOrDefault(u => u.Login.Trim() == login && u.Password.Trim().ToLower() == hashedPassword.ToLower());
 
                 if (user != null)
                 {
