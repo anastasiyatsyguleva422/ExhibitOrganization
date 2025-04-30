@@ -72,6 +72,11 @@ namespace WpfApp1
                 decimal parsedPrice;
                 if (Decimal.TryParse(PriceTextBox.Text.Trim(), out parsedPrice))
                 {
+                    if (parsedPrice < 0)
+                    {
+                        MessageBox.Show("Цена не может быть отрицательной.");
+                        return;
+                    }
                     price = parsedPrice;
                 }
                 else
@@ -80,6 +85,7 @@ namespace WpfApp1
                     return;
                 }
             }
+
 
             if (string.IsNullOrWhiteSpace(title) || type == null || year == null || selectedExhibition == null)
             {

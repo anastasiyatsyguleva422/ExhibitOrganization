@@ -3,46 +3,49 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Регистрация" Background="#d9c4bd">
     <Grid Margin="20" Background="#d9c4bd">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600">
             <TextBlock Text="Фамилия, Имя, Отчество:" Foreground="Black" />
-            <TextBox Name="TextBoxFIO" Width="200" Foreground="Black" Background="#f5f3f2" />
+            <TextBox Name="TextBoxFIO" Width="500" Foreground="Black" Background="#f5f3f2" />
 
             <TextBlock Text="Логин:" Foreground="Black"/>
-            <TextBox Name="TextBoxLogin" Width="200" Foreground="Black" Background="#f5f3f2"/>
+            <TextBox Name="TextBoxLogin" Width="500" Foreground="Black" Background="#f5f3f2"/>
 
             <TextBlock Text="Пароль:" Foreground="Black"/>
-            <PasswordBox Name="PasswordBox" Width="200" Foreground="Black" Background="#f5f3f2"/>
+            <PasswordBox Name="PasswordBox" Width="500" Foreground="Black" Background="#f5f3f2"/>
 
             <TextBlock Text="Пол:" Foreground="Black"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton Name="RadioMale" Content="Мужской" GroupName="Gender" Foreground="Black"/>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                <RadioButton Name="RadioMale" Content="Мужской" GroupName="Gender" Foreground="Black" Margin="0,0,20,0"/>
                 <RadioButton Name="RadioFemale" Content="Женский" GroupName="Gender" Foreground="Black"/>
             </StackPanel>
 
             <TextBlock Text="Роль:" Foreground="Black"/>
-            <ComboBox Name="CmbRole" Width="200" Foreground="Black" Background="#f5f3f2">
+            <ComboBox Name="CmbRole" Width="500" Foreground="Black" Background="#f5f3f2">
                 <ComboBoxItem Content="Администратор"/>
                 <ComboBoxItem Content="Посетитель"/>
                 <ComboBoxItem Content="Деятель"/>
                 <ComboBoxItem Content="Организатор"/>
             </ComboBox>
+
             <TextBlock Text="Возраст:" Visibility="Collapsed" x:Name="AgeTextBlock"/>
-            <TextBox x:Name="AgeTextBox" Height="30" Margin="0,0,0,15" Visibility="Collapsed"/>
+            <TextBox x:Name="AgeTextBox" Height="30" Width="500" Margin="0,0,0,15" Visibility="Collapsed"/>
 
             <TextBlock Text="Льготы:" Visibility="Collapsed" x:Name="BenefitsTextBlock"/>
-            <TextBox x:Name="BenefitsTextBox" Height="30" Margin="0,0,0,15" Visibility="Collapsed"/>
+            <TextBox x:Name="BenefitsTextBox" Height="30" Width="500" Margin="0,0,0,15" Visibility="Collapsed"/>
 
             <TextBlock Text="Номер телефона:" Foreground="Black"/>
-            <TextBox x:Name="TextBoxPhone" PreviewTextInput="TextBoxPhone_PreviewTextInput" TextChanged="TextBoxPhone_TextChanged" 
-                     MaxLength="18" Width="200" Background="#f5f3f2"/>
+            <TextBox x:Name="TextBoxPhone" PreviewTextInput="TextBoxPhone_PreviewTextInput"
+             TextChanged="TextBoxPhone_TextChanged" MaxLength="18"
+             Width="500" Background="#f5f3f2"/>
 
-          
-
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Name="RegisterButton" Content="Регистрация" Click="RegisterButton_Click" Foreground="Black" Width="100" Background="#911e42"/>
-                <Button Name="CancelButton" Content="Отмена" Click="CancelButton_Click" Margin="10,0,0,0" Foreground="Black" Width="100" Background="#ba7b85"/>
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <Button Name="RegisterButton" Content="Регистрация" Click="RegisterButton_Click"
+                Foreground="White" Width="180" Background="#911e42" Margin="0,0,10,0"/>
+                <Button Name="CancelButton" Content="Отмена" Click="CancelButton_Click"
+                Foreground="White" Width="180" Background="#ba7b85"/>
             </StackPanel>
         </StackPanel>
+
 
         <Image Source="/image/pngwing.com (2).png"
                HorizontalAlignment="Left"
