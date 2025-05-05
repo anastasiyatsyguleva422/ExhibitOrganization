@@ -146,6 +146,7 @@
           <Property Name="ID_Выставки" Type="int" />
           <Property Name="ID_Деятели" Type="int" />
           <Property Name="Цена" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <Association Name="FK__Выставки___ID_Вы__48CFD27E">
           <End Role="Выставки" Type="Self.Выставки" Multiplicity="1" />
@@ -638,6 +639,7 @@
           <NavigationProperty Name="Деятели" Relationship="ModernArtModel.FK_Экспонат_Деятели" FromRole="Экспонат" ToRole="Деятели" />
           <NavigationProperty Name="Продажи" Relationship="ModernArtModel.FK__Продажи__ID_Эксп__4222D4EF" FromRole="Экспонат" ToRole="Продажи" />
           <Property Name="Цена" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <Association Name="FK__Выставки___ID_Вы__48CFD27E">
           <End Type="ModernArtModel.Выставки" Role="Выставки" Multiplicity="1" />
@@ -994,6 +996,7 @@
           <EntitySetMapping Name="Экспонат">
             <EntityTypeMapping TypeName="ModernArtModel.Экспонат">
               <MappingFragment StoreEntitySet="Экспонат">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Цена" ColumnName="Цена" />
                 <ScalarProperty Name="ID_Деятели" ColumnName="ID_Деятели" />
                 <ScalarProperty Name="ID_Выставки" ColumnName="ID_Выставки" />

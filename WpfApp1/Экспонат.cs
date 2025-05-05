@@ -28,6 +28,7 @@ namespace WpfApp1
         public Nullable<int> ID_Выставки { get; set; }
         public Nullable<int> ID_Деятели { get; set; }
         public Nullable<decimal> Цена { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Выставки Выставки { get; set; }
         public virtual Деятели Деятели { get; set; }

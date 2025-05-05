@@ -19,6 +19,7 @@ namespace WpfApp1
         private void LoadExhibits()
         {
             var exhibits = db.Экспонат
+.Where(e => e.IsDeleted != true)
                 .Select(e => new
                 {
                     e.ID_Экспонат,
@@ -31,6 +32,7 @@ namespace WpfApp1
 
             ExhibitsListView.ItemsSource = exhibits;
         }
+
 
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
@@ -104,16 +106,20 @@ namespace WpfApp1
                 return;
             }
 
-            foreach (var selectedItem in selectedItems)
-            {
-                var exhibit = db.Экспонат.Find(selectedItem.ID_Экспонат);
-                if (exhibit != null)
+           
+                foreach (var selectedItem in selectedItems)
                 {
-                    db.Экспонат.Remove(exhibit);
+                    var exhibit = db.Экспонат.Find(selectedItem.ID_Экспонат);
+                    if (exhibit != null)
+                    {
+                        exhibit.IsDeleted = true;
+                    }
                 }
-            }
 
-            db.SaveChanges();
+                db.SaveChanges();
+                MessageBox.Show("Экспонаты помечены как удалённые!");
+
+                db.SaveChanges();
             MessageBox.Show("Экспонаты удалены!");
             LoadExhibits();
         }
