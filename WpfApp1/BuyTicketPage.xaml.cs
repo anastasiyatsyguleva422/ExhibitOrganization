@@ -49,38 +49,56 @@ namespace WpfApp1
             }
         }
 
-        private void BuyTicketButton_Click(object sender, RoutedEventArgs e)
+       private void BuyTicketButton_Click(object sender, RoutedEventArgs e)
+{
+    var selectedExhibition = ExhibitionComboBox.SelectedItem as Выставки;
+
+    if (selectedExhibition == null)
+    {
+        MessageBox.Show("Пожалуйста, выберите выставку.");
+        return;
+    }
+
+    if (App.CurrentUser?.ID_Посетители == null)
+    {
+        MessageBox.Show("Вы не зарегистрированы как посетитель.");
+        return;
+    }
+
+    using (var db = new ModernArtEntities())
+    {
+        var ticketPurchase = new ПокупкиБилетов
         {
-            var selectedExhibition = ExhibitionComboBox.SelectedItem as Выставки;
+            ID_Выставки = selectedExhibition.ID_Выставки,
+            ID_Посетители = App.CurrentUser.ID_Посетители.Value,
+            Стоимость = selectedExhibition.Стоимость,
+            ДатаПокупки = DateTime.Now
+        };
 
-            if (selectedExhibition == null)
-            {
-                MessageBox.Show("Пожалуйста, выберите выставку.");
-                return;
-            }
+        db.ПокупкиБилетов.Add(ticketPurchase);
+        db.SaveChanges();
 
-            if (App.CurrentUser?.ID_Посетители == null)
-            {
-                MessageBox.Show("Вы не зарегистрированы как посетитель.");
-                return;
-            }
+        var exhibitionToRemove = db.Выставки_Посетители
+            .FirstOrDefault(x => x.ID_Посетители == App.CurrentUser.ID_Посетители && x.ID_Выставки == selectedExhibition.ID_Выставки);
 
-            using (var db = new ModernArtEntities())
-            {
-                var ticketPurchase = new ПокупкиБилетов
-                {
-                    ID_Выставки = selectedExhibition.ID_Выставки,
-                    ID_Посетители = App.CurrentUser.ID_Посетители.Value,
-                    Стоимость = selectedExhibition.Стоимость
-                };
-
-                db.ПокупкиБилетов.Add(ticketPurchase);
-                db.SaveChanges();
-            }
-
-            MessageBox.Show("Билет успешно куплен!");
-            NavigationService?.Navigate(new VisitorPage());  
+        if (exhibitionToRemove != null)
+        {
+            db.Выставки_Посетители.Remove(exhibitionToRemove);
+            db.SaveChanges();
         }
+
+        var writeReviewPage = new WriteReviewPage();
+        writeReviewPage.LoadExhibitions();  
+
+        LoadExhibitions();
+    }
+
+    MessageBox.Show("Билет успешно куплен!");
+
+    NavigationService?.Navigate(new VisitorPage());
+}
+
+
 
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {

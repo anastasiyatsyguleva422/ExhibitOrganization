@@ -9,13 +9,17 @@ namespace WpfApp1
     {
         private int exhibitionId;
         private Выставки currentExhibition;
+        private ManageExhibitionsPage _parentPage;
 
-        public EditExhibitionPage(int id)
+        public EditExhibitionPage(int id, ManageExhibitionsPage parentPage)
         {
             InitializeComponent();
             exhibitionId = id;
+            _parentPage = parentPage; 
             LoadExhibition();
         }
+
+
 
         private void LoadExhibition()
         {
@@ -35,7 +39,6 @@ namespace WpfApp1
                 CostTextBox.Text = currentExhibition.Стоимость?.ToString();
                 DescriptionTextBox.Text = currentExhibition.Описание_тематики;
 
-                // Загрузка мест
                 var venues = db.Место_проведения.ToList();
                 VenueComboBox.ItemsSource = venues;
                 VenueComboBox.SelectedValue = currentExhibition.ID_Место_проведения;
@@ -44,7 +47,9 @@ namespace WpfApp1
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TitleTextBox.Text) || !StartDatePicker.SelectedDate.HasValue || !EndDatePicker.SelectedDate.HasValue)
+            if (string.IsNullOrWhiteSpace(TitleTextBox.Text) ||
+                !StartDatePicker.SelectedDate.HasValue ||
+                !EndDatePicker.SelectedDate.HasValue)
             {
                 MessageBox.Show("Заполните обязательные поля (Название, Даты).");
                 return;
@@ -69,12 +74,14 @@ namespace WpfApp1
                         exhibition.ID_Место_проведения = (int)VenueComboBox.SelectedValue;
 
                     db.SaveChanges();
-                    MessageBox.Show("Выставка успешно обновлена!");
-                    NavigationService?.GoBack();
                 }
             }
 
+            MessageBox.Show("Выставка успешно обновлена!");
+
+            NavigationService?.Navigate(new ManageExhibitionsPage());
         }
+
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new ManageExhibitionsPage());

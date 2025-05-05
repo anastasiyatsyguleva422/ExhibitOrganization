@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WpfApp1
 {
-    // ---------------- Место_проведения ----------------
     [MetadataType(typeof(Место_проведенияMetadata))]
     public partial class Место_проведения { }
 
@@ -14,7 +13,6 @@ namespace WpfApp1
         public int ID_Место_проведения { get; set; }
     }
 
-    // ---------------- Отзывы ----------------
     [MetadataType(typeof(ОтзывыMetadata))]
     public partial class Отзывы { }
 
@@ -24,7 +22,6 @@ namespace WpfApp1
         public int ID_Отзывы { get; set; }
     }
 
-    // ---------------- Посетители ----------------
     [MetadataType(typeof(ПосетителиMetadata))]
     public partial class Посетители { }
 
@@ -34,7 +31,6 @@ namespace WpfApp1
         public int ID_Посетители { get; set; }
     }
 
-    // ---------------- Посетители_Отзывы ----------------
     [MetadataType(typeof(Посетители_ОтзывыMetadata))]
     public partial class Посетители_Отзывы { }
 
@@ -47,7 +43,6 @@ namespace WpfApp1
         public int ID_Отзывы { get; set; }
     }
 
-    // ---------------- Продажи ----------------
     [MetadataType(typeof(ПродажиMetadata))]
     public partial class Продажи { }
 
@@ -57,7 +52,6 @@ namespace WpfApp1
         public int ID_Продажи { get; set; }
     }
 
-    // ---------------- Экспонат ----------------
     [MetadataType(typeof(ЭкспонатMetadata))]
     public partial class Экспонат { }
 
@@ -67,7 +61,6 @@ namespace WpfApp1
         public int ID_Экспонат { get; set; }
     }
 
-    // ---------------- User ----------------
     [MetadataType(typeof(UserMetadata))]
     public partial class User { }
 

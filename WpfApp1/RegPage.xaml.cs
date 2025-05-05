@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WpfApp1
 {
@@ -16,7 +18,19 @@ namespace WpfApp1
 
             CmbRole.SelectionChanged += CmbRole_SelectionChanged;
         }
-
+        private string ComputeSha256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.Unicode.GetBytes(rawData));
+                StringBuilder builder = new StringBuilder();
+                foreach (var t in bytes)
+                {
+                    builder.Append(t.ToString("X2"));
+                }
+                return builder.ToString();
+            }
+        }
         private void CmbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedRole = (CmbRole.SelectedItem as ComboBoxItem)?.Content.ToString().Trim();
@@ -84,15 +98,18 @@ namespace WpfApp1
                     int? age = selectedRole == "Visitor" && !string.IsNullOrEmpty(AgeTextBox.Text) ? Convert.ToInt32(AgeTextBox.Text) : (int?)null;
                     string benefits = selectedRole == "Visitor" ? BenefitsTextBox.Text.Trim() : null;
 
+                    string hashedPassword = ComputeSha256Hash(PasswordBox.Password.Trim()); 
+
                     User newUser = new User
                     {
                         FIO = TextBoxFIO.Text.Trim(),
                         Login = TextBoxLogin.Text.Trim(),
-                        Password = PasswordBox.Password.Trim(),
+                        Password = hashedPassword, 
                         Gender = selectedGender,
                         Role = selectedRole,
                         PhoneNumber = TextBoxPhone.Text.Trim(),
                     };
+
 
                     db.User.Add(newUser);
                     db.SaveChanges();

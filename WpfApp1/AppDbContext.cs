@@ -28,11 +28,9 @@ namespace WpfApp1
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Указываем ключ для Деятелей
             modelBuilder.Entity<Деятели>()
                 .HasKey(d => d.ID_Деятели);
 
-            // Указываем составной ключ для связующей таблицы
             modelBuilder.Entity<Выставки_Деятели>()
                 .HasKey(x => new { x.ID_Выставки, x.ID_Деятели });
 

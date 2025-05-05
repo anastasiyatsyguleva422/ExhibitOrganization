@@ -51,10 +51,11 @@
 
                         <TextBlock Text="Место проведения:" FontSize="16"/>
                         <ComboBox x:Name="VenueComboBox"
-                                  DisplayMemberPath="Название"
-                                  SelectedValuePath="ID_Место"
-                                  Margin="0,5,0,20"
-                                  FontSize="14"/>
+          DisplayMemberPath="Название"
+          SelectedValuePath="ID_Место_проведения"
+          Margin="0,5,0,20"
+          FontSize="14"/>
+
 
                         <Button Content="Сохранить изменения"
                                 Click="SaveChanges_Click"

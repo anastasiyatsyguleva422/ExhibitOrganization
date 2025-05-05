@@ -13,7 +13,7 @@ namespace WpfApp1
             LoadExhibitions();  
         }
 
-        private void LoadExhibitions()
+        public void LoadExhibitions()
         {
             using (var db = new ModernArtEntities())
             {
@@ -23,16 +23,17 @@ namespace WpfApp1
                     return;
                 }
 
-                var registeredExhibitions = db.Выставки_Посетители
-                    .Where(r => r.ID_Посетители == App.CurrentUser.ID_Посетители)
-                    .Select(r => r.Выставки)
+                var purchasedExhibitions = db.ПокупкиБилетов
+                    .Where(p => p.ID_Посетители == App.CurrentUser.ID_Посетители)
+                    .Select(p => p.Выставки)
                     .ToList();
 
-                ExhibitionComboBox.ItemsSource = registeredExhibitions;
+                ExhibitionComboBox.ItemsSource = purchasedExhibitions;
                 ExhibitionComboBox.DisplayMemberPath = "Название";
                 ExhibitionComboBox.SelectedValuePath = "ID_Выставки";
             }
         }
+
 
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

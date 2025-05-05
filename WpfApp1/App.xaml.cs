@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using WpfApp1; // ← скорее всего, это нужное пространство имён (если нет — см. ниже)
+using WpfApp1; 
 
 namespace WpfApp1
 {
